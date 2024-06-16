@@ -208,7 +208,7 @@ int main(int argc, char **argv) {
    char *d = "uio0";
    int fd_uio;
    int port = 2542;
-   char dev_file[]="/dev/";
+   char full_file_name[40];
    
    struct sockaddr_in address;
    
@@ -231,8 +231,8 @@ int main(int argc, char **argv) {
          return 1;
       }
 	  
-   strcat(dev_file,d);
-   fd_uio = open(dev_file, O_RDWR );
+   sprintf(full_file_name, "/dev/%s", d);
+   fd_uio = open(full_file_name, O_RDWR );
    if (fd_uio < 1) {
       fprintf(stderr,"Failed to Open UIO Device\n");
       return -1;
